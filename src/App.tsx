@@ -1,9 +1,6 @@
-function App() {
+import './index.css'
+import { Router } from './components/Router';
 
-  return (
-    <>
-    </>
-  )
-}
-
-export default App
+export const App = () => (
+    <Router />
+);
