@@ -1,4 +1,5 @@
 export const ROUTES = {
-    MAINPAGE: '/'
+    MAINPAGE: '/',
+    USERS: '/users',
     // тут могут быть еще руты на разные странички
 };

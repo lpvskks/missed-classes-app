@@ -12,11 +12,13 @@ import {
 import { Layout } from '@/components/Layout';
 
 import { ROUTES } from '@/utils/routes';
+import { UsersPage } from './pages/Users/UsersPage';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route element={<Layout />}>
             <Route path={ROUTES.MAINPAGE} element = {<MainPage/>} />
+            <Route path={ROUTES.USERS} element={<UsersPage />} />
         </Route>,
     )
 )

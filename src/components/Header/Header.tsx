@@ -9,7 +9,7 @@ const Header: React.FC = () => {
                     Лого
                 </a>
                 <nav className="header_left">
-                    <a href="/profile" className="header">
+                    <a href="/users" className="header">
                         Пользователи
                     </a>
                     <a href="/favorites" className='header'>
