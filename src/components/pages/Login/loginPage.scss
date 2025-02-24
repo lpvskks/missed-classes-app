@@ -1,0 +1,20 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10vh auto;
+}
+
+button {
+    background-color: #D1DFF3;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}

@@ -1,7 +1,7 @@
 import { UserCard } from './UserCard';
 import './usersPage.scss';
 
-export const UsersPage = () => {
+const UsersPage = () => {
     return (
         <div className="users-page">
             <h1>Пользователи</h1>
@@ -9,3 +9,5 @@ export const UsersPage = () => {
         </div>
     );
 };
+
+export default UsersPage;

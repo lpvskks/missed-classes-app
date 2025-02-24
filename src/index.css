@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 0.6em 1.2em;
+    margin: 5px;
+    font-size: 1em;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+input:focus {
+    border:  1px solid #ccc;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: 400;
+}
