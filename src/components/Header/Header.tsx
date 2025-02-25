@@ -12,7 +12,7 @@ const Header: React.FC = () => {
                     <a href="/users" className="header">
                         Пользователи
                     </a>
-                    <a href="/favorites" className='header'>
+                    <a href="/requests" className='header'>
                         Заявки
                     </a>
                 </nav>  
