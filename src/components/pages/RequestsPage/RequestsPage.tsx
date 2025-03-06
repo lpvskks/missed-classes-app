@@ -2,7 +2,7 @@ import { UserCard } from '@/components/UserCard/UserCard';
 import './requestPage.scss'; 
 import { useState } from 'react';
 
-export const RequestPage = () => {
+const RequestPage = () => {
   const [showGraySquare, setShowGraySquare] = useState(false);
 
   const handleCardClick = () => {
@@ -22,11 +22,13 @@ export const RequestPage = () => {
                 <p className="file-name">spravka.docx</p>
             </div>
             <div className="buttons-section">
-                <button className="accept-button" />
-                <button className="reject-button" />
+                <button className="button accept" />
+                <button className="button reject" />
             </div>
             </div>}
           </div>
       </div>
   );
 };
+
+export default RequestPage;

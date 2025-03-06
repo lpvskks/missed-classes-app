@@ -1,7 +1,11 @@
 import React from 'react';
+import { useLogout } from '@/hooks/useLogout';
 import './header.scss';
 
 const Header: React.FC = () => {
+
+    const { logout } = useLogout();
+
     return (
         <header className="header_navigation">
             <div className='header_navigation_content'>
@@ -17,7 +21,7 @@ const Header: React.FC = () => {
                     </a>
                 </nav>  
                 <nav className="header_right">
-                    <a href="/logout" className="header">
+                    <a onClick={logout} className="header">
                         Выйти
                     </a>
                 </nav>          

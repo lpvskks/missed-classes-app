@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useRegister } from "@/hooks/useRegister"
 import './registrationPage.scss'
 
 const RegistrationPage = () => {
@@ -8,6 +9,15 @@ const RegistrationPage = () => {
     const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+
+    const { register, loading, error, success } = useRegister();
+
+    const handleSubmit = () => {
+        if (password == passwordConfirm) {
+            register(name, surname, email, password);
+        }
+        // TODO: здесь надо прописать ошибку, если пароли не совпадают
+    };
 
     return (
         <main>
@@ -43,7 +53,10 @@ const RegistrationPage = () => {
                     onChange={(e) => setPasswordConfirm(e.target.value)} 
                     placeholder='Подтвердите пароль'
                 />
-                <button>Зарегистрироваться</button>
+                <button onClick={handleSubmit}>Зарегистрироваться</button>
+                
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                {success && <p style={{ color: "green" }}>{success}</p>}
             </div>
         </main>
     )
