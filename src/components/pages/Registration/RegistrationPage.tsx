@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useRegister } from "@/hooks/useRegister"
+import { useRegister } from "@/hooks/auth/useRegister"
 import './registrationPage.scss'
 
 const RegistrationPage = () => {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import './loginPage.scss'
-import { useLogin } from '@/hooks/useLogin';
+import { useLogin } from '@/hooks/auth/useLogin';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -16,6 +16,10 @@ const LoginPage = () => {
         login(email, password);
         navigate("/");
     };
+
+    const handleRegistration = () => {
+        navigate("/registration");
+    }
 
     return (
         <main>
@@ -36,6 +40,7 @@ const LoginPage = () => {
                 />
 
                 <button onClick={handleSubmit}>Войти</button>
+                <button className="reg" onClick={handleRegistration}>Регистрация</button>
                 
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}

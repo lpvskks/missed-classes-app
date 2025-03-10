@@ -19,7 +19,12 @@ export const useRegister = () => {
 
     try {
       const response = await userRegister({ firstName, lastName, email, password});
-      setSuccess(response.message);
+      setSuccess(response ? "success" : null);
+      console.log(success)
+      if (success == null) {
+        console.log("что то не так!")
+        setError("Неверно введен один из параметров")
+      }
     } catch (err) {
       setError("Ошибка при регистрации");
     } finally {

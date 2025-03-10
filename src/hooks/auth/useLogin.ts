@@ -1,6 +1,5 @@
 import { useState } from "react";
 import userLogin from "@/api/auth/userLogin";
-import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
