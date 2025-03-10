@@ -2,19 +2,19 @@ import { useNavigate } from "react-router-dom"
 import userLogout from "@/api/auth/userLogout";
 
 export const useLogout = () => {
-
+    const navigate = useNavigate();
     const logout = async () => {
-
         try {
-            const response = await userLogout();
-            console.log("Попытка логина прошла успешно")
+            const token = localStorage.getItem("token");
+            if (token) {
+                const response = await userLogout(token);
+                localStorage.removeItem("token");
+                navigate("/login");
+                console.log("Попытка логаута прошла успешно")
+            }
         } catch (err) {
-            console.log("Ошибка при попытке логина");
+            console.log("Ошибка при попытке логаута");
         }
-
-        localStorage.removeItem("token");
-        const navigate = useNavigate();
-        navigate("/login");
     };
   
     return { logout };

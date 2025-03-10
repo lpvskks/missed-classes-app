@@ -1,13 +1,14 @@
 import api from "../instance";
 
-interface LogoutResponse {
-    message: string;
-}
 
-const userLogout = async (): Promise<LogoutResponse> => {
+const userLogout = async (token: string | null) => {
     try {
-        const response = await api.post("/auth/logout");
-        return response.data;
+        const response = await api.post("/auth/logout", null, { 
+            headers: { 
+                Authorization: `Bearer ${token}` 
+            } 
+        });
+        return response;
     } catch (error) {
         console.error("Ошибка логаута:", error);
         throw error;

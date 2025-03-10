@@ -1,5 +1,6 @@
 import { useState } from "react";
 import userLogin from "@/api/auth/userLogin";
+import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -17,10 +18,11 @@ export const useLogin = () => {
 
     try {
         const response = await userLogin({ email, password});
-        if (response.token) {
-            localStorage.setItem("token", response.token);
+        if (response) {
+            localStorage.setItem("token", response.toString());
         }
-        setSuccess(response.message);
+        setSuccess(response ? "success" : null);
+        console.log(success)
     } catch (err) {
       setError("Ошибка при попытке логина");
     } finally {

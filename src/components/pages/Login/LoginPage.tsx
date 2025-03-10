@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import './loginPage.scss'
 import { useLogin } from '@/hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
 
@@ -9,9 +10,11 @@ const LoginPage = () => {
 
     const { login, loading, error, success } = useLogin();
     
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
         login(email, password);
+        navigate("/");
     };
 
     return (
