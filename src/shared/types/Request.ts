@@ -1,7 +1,9 @@
+import { User } from "./User"
+
 export interface Request {
     id: number,
     startedSkipping: string,
     finishedSkipping: string,
     status: ["REJECTED", "ACCEPTED", "PENDING"]
-    userId: number,
+    user: User
 }

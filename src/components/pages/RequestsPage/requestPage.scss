@@ -26,6 +26,8 @@
   left: 50%; 
   margin-top: 10%;
   margin-left: 10px; 
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 .info-section {
@@ -65,10 +67,18 @@
   font-size: 16px;
 }
 
-.button.accept {
+.button.reject {
   background-color: #FF6F5F; 
 }
 
-.button.reject{
+.button.reject:hover {
+  background-color: #e1452d; 
+}
+
+.button.accept {
   background-color: #AEE15C; 
+}
+
+.button.accept:hover {
+  background-color: #8dc63f; 
 }

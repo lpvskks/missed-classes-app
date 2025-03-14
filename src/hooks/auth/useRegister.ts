@@ -19,7 +19,8 @@ export const useRegister = () => {
 
     try {
       const response = await userRegister({ firstName, lastName, email, password});
-      setSuccess(response ? "success" : null);
+      setSuccess(response != null ? "Успех!" : null);
+      console.log(response)
       console.log(success)
       if (success == null) {
         console.log("что то не так!")

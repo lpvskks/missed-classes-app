@@ -18,6 +18,7 @@ export const useLogin = () => {
     try {
         const response = await userLogin({ email, password});
         if (response) {
+            localStorage.removeItem("token")
             localStorage.setItem("token", response.toString());
         }
         setSuccess(response ? "success" : null);

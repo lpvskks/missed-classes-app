@@ -7,6 +7,23 @@
   align-items: center; 
   padding-left: 20px; 
   padding-right: 20px; 
+  margin:10px;
+}
+
+.user-card.selected {
+  background-color: #d1d1d1; 
+}
+
+.user-card.PENDING {
+  background-color: #F0F0F0;
+}
+
+.user-card.ACCEPTED {
+  background-color:rgb(208, 233, 125)
+}
+
+.user-card.REJECTED {
+  background-color: rgb(255, 122, 115);
 }
 
 .user-name {
