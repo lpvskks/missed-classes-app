@@ -2,9 +2,12 @@ import { RequestCard } from '@/components/RequestCard/RequestCard';
 import './requestPage.scss'; 
 import { useRequestsList } from '@/hooks/useRequestsList';
 import { useEffect, useState } from 'react';
+import { getToken } from '@/utils/token';
+import { useNavigate } from 'react-router-dom';
 
 const RequestPage = () => {
     const { fetchRequestsList, requests, loading, error } = useRequestsList();
+    const navigate = useNavigate();
 
     const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
 
@@ -14,6 +17,12 @@ const RequestPage = () => {
     };
 
     useEffect(() => {
+        const token = getToken();
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
         fetchRequestsList();
         if (!loading) {
             console.log(requests);

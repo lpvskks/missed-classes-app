@@ -9,14 +9,12 @@ const Header: React.FC = () => {
     return (
         <header className="header_navigation">
             <div className='header_navigation_content'>
-                <a className="site-name" href="/">
-                    Лого
-                </a>
-                <nav className="header_left">
+            <img src='src/assets/Logo.svg' className='header_logo' alt='Logo' />
+            <nav className="header_links">
                     <a href="/users" className="header">
                         Пользователи
                     </a>
-                    <a href="/requests" className='header'>
+                    <a href="/" className='header'>
                         Заявки
                     </a>
                 </nav>  

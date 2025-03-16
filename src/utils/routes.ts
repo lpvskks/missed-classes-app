@@ -3,5 +3,4 @@ export const ROUTES = {
     USERS: '/users',
     REGISTRATION: '/registration',
     LOGIN: '/login',
-    REQUESTS: '/requests',
 };
