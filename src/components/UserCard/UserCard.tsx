@@ -1,52 +1,56 @@
-import { useState } from 'react';
 import './UserCard.scss'; 
-import { Request } from '@/shared/types/Request';
+import { User, UserRole } from '@/shared/types/User';
 import handleRequests from '@/api/requests/handleRequests';
+import { Request } from '@/shared/types/Request';
+import { useState } from 'react';
 
 export interface UserCardProps {
+    user: User; 
     width?: string;
     height?: string;
     showRoleButton?: boolean;
-    showGraySquare?: boolean;
     isSelected?: boolean;
     request: Request;
 }
 
-export const UserCard: React.FC<UserCardProps> = ({ width, height, showRoleButton, showGraySquare, isSelected, request }) => {
+const roles = Object.values<UserRole>(UserRole);
+
+export const UserCard: React.FC<UserCardProps> = ({ user, width, height, showRoleButton, isSelected, request}) => {
+    const [selectedRole, setSelectedRole] = useState<UserRole | null>(user.userRole);
+
+    if (user.userRole === UserRole.ADMIN) {
+        return null;
+    }
 
     const handleButtonClick = (type: string) => {
         handleRequests({ id: request.id, status: type });
-
     }
+
+    const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newRole = event.target.value as UserRole;
+        setSelectedRole(newRole);
+        handleRequests({ id: request.id, status: newRole });
+    };
 
     return (
         <div className={`user-card${isSelected ? ' selected' : ''}`} style={{ width, height }}>
-            <p className="user-name">Айди юзера {request.userId}</p>
-            {/* TODO: тут должно быть имя! но бэки чето попутали */}
-            {showRoleButton && ( 
+            <p className="user-name">{user.firstName} {user.lastName}</p>
+            <p className="user-group">{user.studentGroup}</p>
+            {showRoleButton && (
                 <div className="dropdown">
-                    <select className="role-button">
-                        <option disabled selected>Назначить роль</option>
-                        <option value="User">User</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Moderator">Moderator</option>
+                    <select
+                        className="role-button"
+                        value={selectedRole || ""}
+                        onChange={handleRoleChange}
+                        disabled={user.userRole === UserRole.ADMIN} 
+                    >
+                        <option disabled value="">Назначить роль</option>
+                        {roles.filter(role => role !== UserRole.ADMIN).map(role => ( 
+                            <option key={role} value={role}>{role}</option>
+                        ))}
                     </select>
                 </div>
             )}
-            {showGraySquare &&
-                <div className="gray-square">
-                <div className="info-section">
-                    <p className="header-text">Пропускаемые даты:</p>
-                    <p className="dates-text">{request.startedSkipping} - {request.finishedSkipping}</p>
-                    <p className="document-text">Посмотреть документ</p>
-                    <p className="file-name">spravka.docx</p>
-                </div>
-                <div className="buttons-section">
-                    <button className="button reject" onClick={() => handleButtonClick("REJECTED")}/>
-                    <button className="button accept" onClick={() => handleButtonClick("ACCEPTED")}/>
-                </div>
-            </div>
-            }
         </div>
     );
 };

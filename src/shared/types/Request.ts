@@ -7,3 +7,6 @@ export interface Request {
     status: ["REJECTED", "ACCEPTED", "PENDING"]
     user: User
 }
+
+export type { User }
+
