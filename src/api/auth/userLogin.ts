@@ -13,7 +13,8 @@ interface LoginResponse {
 const userLogin = async (data: LoginData): Promise<LoginResponse> => {
     try {
         const response = await api.post("/auth/login", data);
-        return response.data;
+        return response.data.token;
+   
     } catch (error) {
         console.error("Ошибка логина:", error);
         throw error;

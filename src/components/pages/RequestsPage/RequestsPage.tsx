@@ -32,7 +32,7 @@ const RequestPage = () => {
     return (
         <div className="request-page">
             <h1>Заявки</h1>
-            {requests.map((request) => (
+            {(requests || []).map((request) => ( 
                 <div key={request.id} className="user-card-container" onClick={() => handleCardClick(request.id)}>
                     <RequestCard
                     width='400px' 
