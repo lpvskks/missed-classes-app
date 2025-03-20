@@ -26,7 +26,7 @@ const getRequestsList = async (): Promise<Request[]> => {
         const response = await api.get("/request/list", {
             headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
-        console.log(response.data);
+        console.log(response);
         return response.data;
     } catch (error) {
         console.error("Ошибка получения списка заявок:", error);
