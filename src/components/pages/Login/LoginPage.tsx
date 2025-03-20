@@ -12,9 +12,20 @@ const LoginPage = () => {
     
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
-        login(email, password);
-        navigate("/");
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault(); 
+
+        if (!email || !password) {
+            alert("Заполните все поля!");
+            return;
+        }
+
+        try {
+            await login(email, password); 
+            navigate("/"); 
+        } catch (err) {
+            console.error("Ошибка входа:", err);
+        }
     };
 
     const handleRegistration = () => {
@@ -25,21 +36,26 @@ const LoginPage = () => {
         <main>
             <div className='content'>
                 <h2>Вход</h2>
-                <input 
-                    type="text" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    placeholder="Email"
-                />
+                <form onSubmit={handleSubmit}>
+                    <input 
+                        type="email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        placeholder="Email"
+                    />
 
-                <input 
-                    type="text" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    placeholder="Пароль"
-                />
+                    <input 
+                        type="password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        placeholder="Пароль"
+                    />
 
-                <button onClick={handleSubmit}>Войти</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? "Вход..." : "Войти"}
+                    </button>
+                </form>
+
                 <button className="reg" onClick={handleRegistration}>Регистрация</button>
                 
                 {error && <p style={{ color: "red" }}>{error}</p>}

@@ -11,6 +11,11 @@ main {
     align-items: center;
     margin: 10vh auto;
 }
+form {
+    display: flex;
+    flex-direction: column; 
+    width: 100%; 
+}
 
 .reg {
     background-color:rgba(255, 255, 255, 0);
