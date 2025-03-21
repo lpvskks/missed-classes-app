@@ -12,7 +12,7 @@ const handleRequests = async ({ id, status }: RequestPatchData) => {
     try {
         const response = await api.patch(
             `/request/${id}/status`,
-            status,
+            { status },
             {
                 headers: token ? { Authorization: `Bearer ${token}` } : {},
             }

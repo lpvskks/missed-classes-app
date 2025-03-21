@@ -15,7 +15,9 @@ export interface RequestCardProps {
 
 export const RequestCard: React.FC<RequestCardProps> = ({ width, height, showGraySquare, status, isSelected, request }) => {
     const handleButtonClick = (type: string) => {
+        console.log(request.id, type)
         handleRequests({ id: request.id, status: type });
+
     };
 
     return (
