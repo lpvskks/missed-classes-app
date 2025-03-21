@@ -15,6 +15,14 @@ export interface UserCardProps {
 
 const roles = Object.values<UserRole>(UserRole);
 
+const roleTranslations: Record<UserRole, string> = {
+    [UserRole.DEANERY]: "Декан",
+    [UserRole.TEACHER]: "Преподаватель",
+    [UserRole.STUDENT]: "Студент",
+    [UserRole.USER]: "Пользователь",
+    [UserRole.ADMIN]: "Администратор"
+};
+
 export const UserCard: React.FC<UserCardProps> = ({ user, width, height, showRoleButton, isSelected, changeRole, fetchUsers, currentUserRole }) => {
     const [selectedRole, setSelectedRole] = useState<string>("");
 
@@ -47,7 +55,7 @@ export const UserCard: React.FC<UserCardProps> = ({ user, width, height, showRol
 
             <p className="user-name">{user.firstName} {user.lastName}</p>
             <p className="user-group">{user.studentGroup}</p>
-            <p className="user-role"> {user.userRole} </p>
+            <p className="user-role">{roleTranslations[user.userRole]}</p>
 
             {showRoleButton && currentUserRole !== UserRole.TEACHER && (
                 <div className="dropdown">
@@ -59,7 +67,7 @@ export const UserCard: React.FC<UserCardProps> = ({ user, width, height, showRol
                     >
                         <option disabled value="">Изменить роль</option>
                         {filteredRoles.map(role => (
-                            <option key={role} value={role}>{role}</option>
+                            <option key={role} value={role}>{roleTranslations[role]}</option> 
                         ))}
                     </select>
                 </div>

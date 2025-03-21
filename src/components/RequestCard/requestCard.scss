@@ -24,6 +24,17 @@
     align-items: center;
     justify-content: center;
 }
+.buttons-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    position: absolute;
+    bottom: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%; 
+    padding: 0 15px;
+}
   
 .role-button {
     background-color: #D1DFF3; 

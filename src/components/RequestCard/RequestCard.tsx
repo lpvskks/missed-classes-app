@@ -1,27 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './requestCard.scss'; 
 import { Request } from '@/shared/types/Request';
 import handleRequests from '@/api/requests/handleRequests';
-import { downloadFile } from '@/utils/downloadFile'; 
+import { downloadFile } from '@/utils/downloadFile';
+import { getUserRoleFromToken } from '@/utils/authUtils';
 
 export interface RequestCardProps {
     width?: string;
     height?: string;
     showGraySquare?: boolean;
-    status: ["REJECTED", "ACCEPTED", "PENDING"];
+    status: "REJECTED" | "ACCEPTED" | "PENDING";
     isSelected?: boolean;
     request: Request;
 }
 
 export const RequestCard: React.FC<RequestCardProps> = ({ width, height, showGraySquare, status, isSelected, request }) => {
-    const handleButtonClick = (type: string) => {
-        console.log(request.id, type)
-        handleRequests({ id: request.id, status: type });
+    const [currentStatus, setCurrentStatus] = useState(status);
+    const [userRole, setUserRole] = useState<string | null>(null);
 
+    useEffect(() => {
+        setCurrentStatus(status); 
+    }, [status]);
+
+    useEffect(() => {
+        const role = getUserRoleFromToken();
+        setUserRole(role);
+    }, []);
+
+    const handleButtonClick = async (type: "REJECTED" | "ACCEPTED") => {
+        try {
+            await handleRequests({ id: request.id, status: type });
+            setCurrentStatus(type);
+        } catch (error) {
+            console.error("Ошибка при обновлении статуса запроса:", error);
+        }
     };
 
     return (
-        <div className={`user-card${isSelected ? ' selected' : ''} ${status}`} style={{ width, height }}>
+        <div className={`user-card${isSelected ? ' selected' : ''} ${currentStatus}`} style={{ width, height }}>
             <p className="user-name">{request.user.firstName} {request.user.lastName}</p>
             {showGraySquare && (
                 <div className="gray-square">
@@ -44,20 +60,25 @@ export const RequestCard: React.FC<RequestCardProps> = ({ width, height, showGra
                             </div>
                         )}
                     </div>
-                    <div className="buttons-section">
-                        <button className="button reject"
-                            onClick={(event) => {
-                                event.stopPropagation(); 
-                                handleButtonClick("REJECTED");
-                            }}
-                        />
-                        <button className="button accept" 
-                            onClick={(event) => {
-                                event.stopPropagation(); 
-                                handleButtonClick("ACCEPTED");
-                            }}
-                        />
-                    </div>
+                    
+                    {userRole !== "TEACHER" && (
+                        <div className="buttons-section">
+                            <button className="button reject"
+                                onClick={(event) => {
+                                    event.stopPropagation(); 
+                                    handleButtonClick("REJECTED");
+                                }}
+                                disabled={currentStatus !== "PENDING"}
+                            />
+                            <button className="button accept" 
+                                onClick={(event) => {
+                                    event.stopPropagation(); 
+                                    handleButtonClick("ACCEPTED");
+                                }}
+                                disabled={currentStatus !== "PENDING"}
+                            />
+                        </div>
+                    )}
                 </div>
             )}
         </div>
